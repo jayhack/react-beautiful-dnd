@@ -33,6 +33,10 @@ export default ({ getState, dispatch }: MiddlewareStore) => (
     return;
   }
 
+  if (action.payload.reason === 'CANCEL') {
+    return;
+  }
+
   const state: State = getState();
   const reason: DropReason = action.payload.reason;
 

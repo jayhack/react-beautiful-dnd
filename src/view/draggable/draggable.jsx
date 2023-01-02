@@ -146,10 +146,15 @@ export default function Draggable(props: Props) {
       draggableProps: {
         'data-rbd-draggable-context-id': contextId,
         'data-rbd-draggable-id': draggableId,
-        style,
-        onTransitionEnd,
-      },
-      dragHandleProps,
+    style,
+    onTransitionEnd,
+    onKeyDown: (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        dispatch(drop({ reason: 'CANCEL' }));
+      }
+    },
+    dragHandleProps,
+  };
     };
 
     return result;
