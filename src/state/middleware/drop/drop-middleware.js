@@ -52,10 +52,10 @@ export default ({ getState, dispatch }: MiddlewareStore) => (
   // TODO: should this throw?
   const isWaitingForDrop: boolean =
     state.phase === 'DROP_PENDING' && state.isWaiting;
-  invariant(
-    !isWaitingForDrop,
-    'A DROP action occurred while DROP_PENDING and still waiting',
-  );
+ invariant(
+   (state.phase === 'DRAGGING' || state.phase === 'DROP_PENDING') && action.payload.reason !== 'ESCAPE',
+   `Cannot drop in phase: ${state.phase}`,
+ );
 
   invariant(
     state.phase === 'DRAGGING' || state.phase === 'DROP_PENDING',
