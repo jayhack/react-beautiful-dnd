@@ -25,5 +25,5 @@ export default (state: State, id: DraggableId): boolean => {
 
   // if dropping - allow lifting
   // if cancelling - disallow lifting
-  return state.completed.result.reason === 'DROP';
+ return state.completed.result.reason === 'DROP' || state.completed.result.reason === 'ESCAPE';
 };

@@ -23,14 +23,30 @@ const reorder = (list, startIndex, endIndex) => {
 };
 
 export default class App extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      items: getItems(10),
-      cspErrors: [],
-    };
-    this.onDragEnd = this.onDragEnd.bind(this);
-  }
+ constructor(props, context) {
+   super(props, context);
+   this.state = {
+     items: getItems(10),
+     cspErrors: [],
+   };
+   this.onDragEnd = this.onDragEnd.bind(this);
+   this.onKeyDown = this.onKeyDown.bind(this);
+   this.cancelDrag = this.cancelDrag.bind(this);
+ }
+ 
+ onKeyDown(e) {
+   if (e.key === 'Escape') {
+     this.cancelDrag();
+   }
+ }
+ 
+ cancelDrag() {
+   // TODO: cancel the drag
+ }
+
+ componentDidMount() {
+   document.addEventListener('keydown', this.onKeyDown);
+ }
 
   componentDidMount() {
     document.addEventListener(
