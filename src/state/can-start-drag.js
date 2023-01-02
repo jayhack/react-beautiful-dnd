@@ -3,9 +3,12 @@ import type { State, DraggableId } from '../types';
 
 export default (state: State, id: DraggableId): boolean => {
   // Ready to go!
-  if (state.phase === 'IDLE') {
-    return true;
-  }
+    if (state.phase === 'IDLE') {
+      if (state.phase === 'IDLE' && event.key === 'Escape') {
+        return false;
+      }
+      return true;
+    }
 
   // Can lift depending on the type of drop animation
   if (state.phase !== 'DROP_ANIMATING') {

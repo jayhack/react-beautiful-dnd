@@ -32,8 +32,17 @@ export default ({ getState, dispatch }: MiddlewareStore) => (
     next(action);
     return;
   }
-
-  const state: State = getState();
+  const { event } = action.payload;
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      // handle escape key press
+      dispatch(completeDrop({ completed }));
+      dispatch(resetState());
+      return;
+    }
+  });
+  const state: State = store.getState();
+  const isWaitingForDrop = isWaitingForDropAnimation(state.phase);
   const reason: DropReason = action.payload.reason;
 
   // Still waiting for a bulk collection to publish
